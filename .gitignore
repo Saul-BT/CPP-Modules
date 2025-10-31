@@ -42,3 +42,6 @@ phonebook
 
 # debug information files
 *.dwo
+
+# editor stuff
+.vscode

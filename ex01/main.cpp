@@ -9,15 +9,15 @@ static void addContact(PhoneBook &book) {
     std::string phoneNumber;
     std::string darkestSecret;
 
-    print_msg(READ, "< Type the first name:");
+    print_msg(READ, "<(ADD) Type the first name:");
     getline(std::cin, firstName);
-    print_msg(READ, "< Type the last name:");
+    print_msg(READ, "<(ADD) Type the last name:");
     getline(std::cin, lastName);
-    print_msg(READ, "< Type the nickname:");
+    print_msg(READ, "<(ADD) Type the nickname:");
     getline(std::cin, nickname);
-    print_msg(READ, "< Type the phone number:");
+    print_msg(READ, "<(ADD) Type the phone number:");
     getline(std::cin, phoneNumber);
-    print_msg(READ, "< Type the darkest secret:");
+    print_msg(READ, "<(ADD) Type the darkest secret:");
     getline(std::cin, darkestSecret);
 
     try {
@@ -33,7 +33,7 @@ static void searchContact(PhoneBook &book) {
 
     while (1) {
         std::cout << std::endl;
-        print_msg(READ, "< Type an index:");
+        print_msg(READ, "<(SEARCH) Type an index:");
         getline(std::cin, input);
     
         if (input.size() > 1 || !isdigit(input[0])){
@@ -42,7 +42,7 @@ static void searchContact(PhoneBook &book) {
         }
 
         idx = std::atoi(input.c_str());
-        if (idx > MAX_CONTACTS) {
+        if (idx <= 0 || idx > MAX_CONTACTS) {
             std::stringstream ss;
             ss << MAX_CONTACTS;
             print_msg(ERROR, "The index must be greater than 0 and less or equal than " + ss.str() + ".");

@@ -1,6 +1,6 @@
 #ifndef PHONE_BOOK_CLASS_H
 #define PHONE_BOOK_CLASS_H
-#define MAX_CONTACTS 3
+#define MAX_CONTACTS 8
 
 #include <string>
 #include <cstdlib>
