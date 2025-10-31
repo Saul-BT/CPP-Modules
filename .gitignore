@@ -37,9 +37,6 @@
 *.out
 *.app
 
-## ex01
-phonebook
-
 # debug information files
 *.dwo
 
