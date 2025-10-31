@@ -1,0 +1,6 @@
+{
+  "name": "cpp-modules",
+  "build": {
+    "dockerfile": "Dockerfile"
+  }
+}
