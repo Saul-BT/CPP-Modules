@@ -10,5 +10,7 @@ void HumanB::setWeapon( Weapon const & weapon ) {
 
 // Other functions
 void HumanB::attack( void ) const {
+    if (!this->_weapon)
+        throw std::runtime_error(this->_name + ": I pissed myself");
     std::cout << this->_name << " attacks with their " << this->_weapon->getType() << std::endl;
 }
