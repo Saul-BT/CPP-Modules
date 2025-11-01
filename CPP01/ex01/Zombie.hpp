@@ -5,18 +5,19 @@
 #include <iostream>
 
 class Zombie {
+
 private:
+
     std::string _name;
 
 public:
+
     Zombie( void );
     Zombie( std::string const & name );
     ~Zombie();
 
-    // Setters
     void setName( std::string const & name );
 
-    // Other methods
     void announce( void ) const;
 };
 
