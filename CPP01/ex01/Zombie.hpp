@@ -17,7 +17,7 @@ public:
     void setName( std::string name );
 
     // Other methods
-    void announce( void );
+    void announce( void ) const;
 };
 
 Zombie* zombieHorde( int N, std::string name );
