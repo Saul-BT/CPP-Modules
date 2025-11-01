@@ -9,6 +9,6 @@ Zombie::~Zombie() {
 }
 
 // Other methods
-void Zombie::announce( void ) {
+void Zombie::announce( void ) const {
     std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
