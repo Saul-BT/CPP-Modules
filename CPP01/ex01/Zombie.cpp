@@ -2,7 +2,7 @@
 
 // Constructors
 Zombie::Zombie( void ): _name("Unknown") {}
-Zombie::Zombie( std::string name ): _name(name) {}
+Zombie::Zombie( std::string const & name ): _name(name) {}
 
 // Destructor
 Zombie::~Zombie() {
@@ -10,7 +10,7 @@ Zombie::~Zombie() {
 }
 
 // Setters
-void Zombie::setName( std::string name ) {
+void Zombie::setName( std::string const & name ) {
     this->_name = name;
 }
 

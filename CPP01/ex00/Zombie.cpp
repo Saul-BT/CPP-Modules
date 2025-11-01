@@ -1,7 +1,7 @@
 #include "Zombie.hpp"
 
 // Constructors
-Zombie::Zombie( std::string name ): _name(name) {}
+Zombie::Zombie( std::string const & name ): _name(name) {}
 
 // Destructor
 Zombie::~Zombie() {

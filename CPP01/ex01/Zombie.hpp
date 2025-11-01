@@ -10,16 +10,16 @@ private:
 
 public:
     Zombie( void );
-    Zombie( std::string name );
+    Zombie( std::string const & name );
     ~Zombie();
 
     // Setters
-    void setName( std::string name );
+    void setName( std::string const & name );
 
     // Other methods
     void announce( void ) const;
 };
 
-Zombie* zombieHorde( int N, std::string name );
+Zombie* zombieHorde( int N, std::string const & name );
 
 #endif
