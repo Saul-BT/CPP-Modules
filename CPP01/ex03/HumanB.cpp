@@ -5,9 +5,6 @@ HumanB::HumanB( std::string name ) : _name(name), _weapon(NULL) {}
 
 // Setters
 void HumanB::setWeapon( Weapon const & weapon ) {
-    if (this->_weapon) {
-        delete this->_weapon;
-    }
     this->_weapon = &weapon;
 }
 
