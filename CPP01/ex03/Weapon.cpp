@@ -5,7 +5,7 @@
 Weapon::Weapon ( std::string const & type ) : _type(type) {}
 
 // Setters
-void Weapon::setType( std::string type ) {
+void Weapon::setType( std::string const & type ) {
     this->_type = type;
 }
 

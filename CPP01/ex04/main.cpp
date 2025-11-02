@@ -35,7 +35,7 @@ int main( int argc, char* argv[] ) {
     }
     
     std::string line;
-    if (!getline(fileIn, line)) {
+    if (!std::getline(fileIn, line)) {
         std::cerr << "The file '" << argv[1] << "' is empty" << std::endl;
         return 3;
     }
@@ -43,7 +43,7 @@ int main( int argc, char* argv[] ) {
     do {
         replace(line, argv[2], argv[3]);
         fileOut << line << std::endl;
-    } while (getline(fileIn, line));
+    } while (std::getline(fileIn, line));
 
     fileIn.close();
     fileOut.close();
