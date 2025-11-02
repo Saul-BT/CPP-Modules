@@ -19,16 +19,15 @@ void Harl::error( void ) {
 
 // Public methods
 void Harl::complain( std::string level ) {
-    int levelCount = 4;
     std::locale loc;
     std::string reqLevel = level;
-    std::string levels[levelCount] = {
+    std::string levels[4] = {
         "DEBUG",
         "INFO",
         "WARNING",
         "ERROR",
     };
-    void (Harl::*logFunction[levelCount])(void) = {
+    void (Harl::*logFunction[4])(void) = {
         &Harl::debug,
         &Harl::info,
         &Harl::warning,
@@ -38,7 +37,7 @@ void Harl::complain( std::string level ) {
     for (size_t i = 0; i < level.length(); i++)
         reqLevel[i] = std::toupper(reqLevel[i], loc);
 
-    for(int i = 0; i < levelCount; i++) {
+    for(int i = 0; i < 4; i++) {
         if (levels[i] == reqLevel) {
             (this->*logFunction[i])();
             return;
