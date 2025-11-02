@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-void replace(
+static void replace(
     std::string & str,
     std::string const & search,
     std::string const & replace
@@ -35,10 +35,15 @@ int main( int argc, char* argv[] ) {
     }
     
     std::string line;
-    while (getline(fileIn, line)) {
+    if (!getline(fileIn, line)) {
+        std::cerr << "The file '" << argv[1] << "' is empty" << std::endl;
+        return 3;
+    }
+
+    do {
         replace(line, argv[2], argv[3]);
         fileOut << line << std::endl;
-    }
+    } while (getline(fileIn, line));
 
     fileIn.close();
     fileOut.close();

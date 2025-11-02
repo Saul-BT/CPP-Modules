@@ -44,5 +44,7 @@ void Harl::complain( std::string level ) {
             return;
         }
     }
+
+    std::cerr << "Log level not recognized." << std::endl;
 }
 
