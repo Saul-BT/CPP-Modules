@@ -2,7 +2,7 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SOURCES = Fixed.cpp main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
-NAME = ex00
+NAME = ex01
 
 all: $(NAME)
 
