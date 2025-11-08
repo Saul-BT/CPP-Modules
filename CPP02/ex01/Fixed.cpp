@@ -54,13 +54,9 @@ int Fixed::getRawBits( void ) const {
 
 // Other methods
 float Fixed::toFloat( void ) const {
-    //std::cout << "toFloat member function called" << std::endl;
-
     return this->_value / static_cast<float>(1 << this->_fractionalBits);
 }
 int Fixed::toInt( void ) const {
-    //std::cout << "toInt member function called" << std::endl;
-
     return this->_value / (1 << this->_fractionalBits);
 }
 
