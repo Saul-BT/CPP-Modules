@@ -56,12 +56,13 @@ int Fixed::getRawBits( void ) const {
 float Fixed::toFloat( void ) const {
     return this->_value / static_cast<float>(1 << this->_fractionalBits);
 }
+
 int Fixed::toInt( void ) const {
     return this->_value / (1 << this->_fractionalBits);
 }
 
 // Utilities
-std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
+std::ostream& operator<<(std::ostream & out, Fixed const & fixed) {
     out << fixed.toFloat();
 
     return out;
