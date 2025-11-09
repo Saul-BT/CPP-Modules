@@ -25,6 +25,9 @@ ClapTrap& ClapTrap::operator=( ClapTrap const & other ) {
     std::cout << "Assignment operator called" << std::endl;
     if (this != &other) {
         this->_name = other._name;
+        this->_hitPoints = other._hitPoints;
+        this->_energyPoints = other._energyPoints;
+        this->_attackDamage = other._attackDamage;
     }
 
     return *this;
@@ -33,12 +36,12 @@ ClapTrap& ClapTrap::operator=( ClapTrap const & other ) {
 // Other methods
 void ClapTrap::attack( std::string const & target ) {
     if (this->_hitPoints <= 0) {
-        std::cout << "ClapTrap " << this->_name << " almost dead!" << std::endl;
+        std::cout << "ClapTrap " << this->_name << ": I'm ☠️" << std::endl;
         return;
     }
 
     if (this->_energyPoints == 0) {
-        std::cout << "ClapTrap " << this->_name << " is useless!" << std::endl;
+        std::cout << "ClapTrap " << this->_name << ": I'm tired boss :(" << std::endl;
         return;
     }
 
@@ -49,19 +52,23 @@ void ClapTrap::attack( std::string const & target ) {
 
 void ClapTrap::takeDamage( unsigned int amount ) {
     if (this->_hitPoints <= 0) {
-        std::cout << "ClapTrap " << this->_name << " almost dead! Bully!" << std::endl;
+        std::cout << "ClapTrap " << this->_name << ": I'm ☠️! Bully!" << std::endl;
         return;
     }
 
     this->_hitPoints -= amount;
 
-    std::cout << "ClapTrap " << this->_name << " loses " << amount << " hit point, now has " << this->_hitPoints << " hit points!" << std::endl;
+    std::cout << "ClapTrap " << this->_name << " loses " << amount << " hit points, now has " << this->_hitPoints << " hit points!" << std::endl;
 }
 
 void ClapTrap::beRepaired( unsigned int amount ) {
-    if (this->_energyPoints == 0)
-    {
-        std::cout << "ClapTrap " << this->_name << " is useless!" << std::endl;
+    if (this->_hitPoints <= 0) {
+        std::cout << "ClapTrap " << this->_name << ": I'm ☠️" << std::endl;
+        return;
+    }
+
+    if (this->_energyPoints == 0) {
+        std::cout << "ClapTrap " << this->_name << ": I'm tired boss :(" << std::endl;
         return;
     }
 

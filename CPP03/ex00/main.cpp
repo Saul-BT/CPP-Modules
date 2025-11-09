@@ -8,11 +8,31 @@ int main ( void ) {
 
     d = c;
 
-    a.attack("Jimmy");
-    b.takeDamage(0);
-    c.beRepaired(5);
-    d.attack("Jimmy");
-    b.takeDamage(0);
+    a.attack("🐶 Sanxe");
+    b.attack("🐶 Sanxe");
+    c.attack("🐶 Sanxe");
+    d.attack("🐶 Sanxe");
+
+    // Taxes
+    a.takeDamage(10);
+    b.takeDamage(10);
+    c.takeDamage(10);
+
+    // There's a bug for 'd'
+    for (int i = 0; i < 9; i++)
+        d.beRepaired(1);
+
+    // Trying to recover
+    a.beRepaired(10);
+    b.beRepaired(10);
+    c.beRepaired(10);
+    d.beRepaired(10);
+
+    // Taxes again
+    a.takeDamage(10);
+    b.takeDamage(10);
+    c.takeDamage(10);
+    d.takeDamage(10);
 
     return 0;
 }
