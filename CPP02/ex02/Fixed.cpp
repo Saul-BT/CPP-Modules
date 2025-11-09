@@ -4,8 +4,7 @@
 const int Fixed::_fractionalBits = 8;
 
 // Constructors
-Fixed::Fixed( void ) : _value(0) {
-};
+Fixed::Fixed( void ) : _value(0) { };
 
 Fixed::Fixed( int const value ) {
     this->_value = value * (1 << this->_fractionalBits);
@@ -20,8 +19,7 @@ Fixed::Fixed( Fixed const & other ) {
 };
 
 // Destructor
-Fixed::~Fixed() {
-}
+Fixed::~Fixed() { }
 
 // Assignment operator
 Fixed& Fixed::operator=( Fixed const & other ) {
@@ -81,7 +79,7 @@ Fixed Fixed::operator*( Fixed const & other ) const {
 }
 
 Fixed Fixed::operator/( Fixed const & other ) const {
-    Fixed fixed(this->toFloat() * other.toFloat());
+    Fixed fixed(this->toFloat() / other.toFloat());
 
     return fixed;
 }
@@ -146,21 +144,22 @@ Fixed& Fixed::max( Fixed & f1, Fixed & f2 ) {
     return f2;
 }
 
-Fixed& Fixed::min( Fixed const & f1, Fixed const & f2 ) {
-    if (f1 < f2) return (Fixed&)f1;
+const Fixed& Fixed::min( Fixed const & f1, Fixed const & f2 ) {
+    if (f1 < f2) return f1;
 
-    return (Fixed&)f2;
+    return f2;
 }
 
-Fixed& Fixed::max( Fixed const & f1, Fixed const & f2 ) {
-    if (f1 > f2) return (Fixed&)f1;
+const Fixed& Fixed::max( Fixed const & f1, Fixed const & f2 ) {
+    if (f1 > f2) return f1;
 
-    return (Fixed&)f2;
+    return f2;
 }
 
 // Utilities
-std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
-    out << "pepe: " << fixed.toFloat();
+std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
+{
+    out << fixed.toFloat();
 
     return out;
 }
