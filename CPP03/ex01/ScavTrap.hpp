@@ -12,7 +12,7 @@ public:
     ScavTrap( ScavTrap const & other );
     ~ScavTrap();
 
-    void guardGate();
+    void guardGate( void ) const;
 };
 
 #endif

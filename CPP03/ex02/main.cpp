@@ -15,7 +15,7 @@ int main ( void ) {
     // Taxes
     a.takeDamage(10);
     b.takeDamage(10);
-    c.takeDamage(10);
+    c.takeDamage(100);
 
     // 'c' is trying to evade taxes
     c.guardGate();
@@ -35,6 +35,12 @@ int main ( void ) {
     b.takeDamage(10);
     c.takeDamage(10);
     d.takeDamage(10);
+
+    // 'd' goes crazy for some reason
+    d.highFivesGuys();
+
+    // Taxes for 'd'
+    d.takeDamage(200);
 
     // 'd' goes crazy for some reason
     d.highFivesGuys();

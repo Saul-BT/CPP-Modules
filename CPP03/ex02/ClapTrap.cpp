@@ -56,7 +56,10 @@ void ClapTrap::takeDamage( unsigned int amount ) {
         return;
     }
 
-    this->_hitPoints -= amount;
+    if (static_cast<int>(this->_hitPoints - amount) >= 0)
+        this->_hitPoints -= amount;
+    else
+        this->_hitPoints = 0;
 
     std::cout << "ClapTrap " << this->_name << " loses " << amount << " hit points, now has " << this->_hitPoints << " hit points!" << std::endl;
 }

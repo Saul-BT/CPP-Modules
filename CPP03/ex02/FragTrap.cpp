@@ -25,5 +25,10 @@ FragTrap::~FragTrap() {
 
 // Other methods
 void FragTrap::highFivesGuys( void ) const {
+    if (this->_hitPoints <= 0) {
+        std::cout << "FragTrap '" << this->_name << "': I'm dead 🫠!" << std::endl;
+        return;
+    }
+
     std::cout << "FragTrap '" << this->_name << "' give me f*king five!!!" << std::endl;
 }

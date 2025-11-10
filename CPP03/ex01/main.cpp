@@ -21,6 +21,12 @@ int main ( void ) {
     // 'c' is trying to evade taxes
     c.guardGate();
 
+    // 'c' feels the pain with taxes
+    c.takeDamage(100);
+
+    // 'c' is trying to evade taxes, but it's too late
+    c.guardGate();
+
     // There's a bug for 'd'
     for (int i = 0; i < 9; i++)
         d.beRepaired(1);

@@ -24,6 +24,11 @@ ScavTrap::~ScavTrap() {
 }
 
 // Other methods
-void ScavTrap::guardGate() {
+void ScavTrap::guardGate( void ) const {
+    if (this->_hitPoints <= 0) {
+        std::cout << "ScavTrap '" << this->_name << "': I'm dead 🥲!" << std::endl;
+        return;
+    }
+
     std::cout << "ScavTrap '" << this->_name << "' is now in Gatekeeper mode" << std::endl;
 }
