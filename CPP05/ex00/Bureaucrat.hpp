@@ -24,7 +24,7 @@ public:
     
 
     const std::string & getName( void ) const;
-    const int & getGrade( void ) const;
+    int getGrade( void ) const;
 
     void upgrade( void );
     void downgrade( void );
