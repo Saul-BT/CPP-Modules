@@ -42,7 +42,7 @@ int main( void ) {
 
         std::cout << loquillo << std::endl;
 
-        if (std::rand() > 0.5)
+        if (std::rand() > RAND_MAX / 2)
             loquillo.upgrade();
         else
             loquillo.downgrade();
