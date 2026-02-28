@@ -5,6 +5,8 @@
 #include "PresidentialPardonForm.hpp"
 
 int main( void ) {
+    std::srand(std::time(0));
+
     {
         Bureaucrat god("pepe", 5);
         

@@ -6,6 +6,7 @@
 #include "PresidentialPardonForm.hpp"
 
 int main( void ) {
+    std::srand(std::time(0));
     Intern anon;
     Bureaucrat supervisor("lucas", 1);
     std::string name = supervisor.getName();

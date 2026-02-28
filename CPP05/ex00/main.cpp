@@ -1,10 +1,10 @@
 #include "Bureaucrat.hpp"
 
 int main( void ) {
+    std::srand(std::time(0));
     Bureaucrat juan;
     Bureaucrat pepe("pepe", 1);
 
-    std::srand(std::time(0));
     
     std::cout << "== Bad examples ==" << std::endl;
 
