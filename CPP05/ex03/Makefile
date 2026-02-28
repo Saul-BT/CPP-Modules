@@ -1,0 +1,24 @@
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+SOURCES = Intern.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp AForm.cpp Bureaucrat.cpp main.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
+NAME = ex03
+
+all: $(NAME)
+
+re: fclean all
+
+$(NAME): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJECTS)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+fclean: clean
+	rm -f $(NAME)
+	rm -f *_shrubbery
+
+clean:
+	rm -f $(OBJECTS)
+
+.PHONY: all fclean clean

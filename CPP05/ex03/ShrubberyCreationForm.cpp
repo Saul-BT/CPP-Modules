@@ -1,0 +1,63 @@
+#include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
+
+// Constructors
+ShrubberyCreationForm::ShrubberyCreationForm(
+        void
+    ) : AForm::AForm("ShrubberyCreationForm", false, 145, 137), _target("Unknown") {
+    std::cout << "ShrubberyCreationForm: Default constructor called" << std::endl;
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(
+        std::string const & target
+    ) : AForm::AForm("ShrubberyCreationForm", false, 145, 137), _target(target) {
+    std::cout << "ShrubberyCreationForm: Constructor with parameters called" << std::endl;
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(
+        ShrubberyCreationForm const & other
+    ) : AForm::AForm(other), _target(other._target) {
+    std::cout << "ShrubberyCreationForm: Copy constructor called" << std::endl;
+}
+
+// Destructor
+ShrubberyCreationForm::~ShrubberyCreationForm() {
+    std::cout << "ShrubberyCreationForm: Destructor called" << std::endl;
+}
+
+// Assignment operator
+ShrubberyCreationForm & ShrubberyCreationForm::operator=( ShrubberyCreationForm const & other ) {
+    std::cout << "ShrubberyCreationForm: Assignment operator called" << std::endl;
+
+    if (this != &other) {
+        AForm::operator=(other);
+        this->_target = other._target;
+    }
+
+    return *this;
+}
+
+// Other methods
+void ShrubberyCreationForm::makeTreeASCII( void ) const {
+    std::ofstream file((this->_target + "_shrubbery").c_str());
+
+    if (!file.is_open()) {
+        std::cerr << "Error: file cannot be opened" << std::endl;
+        return;
+    }
+
+    file << "   *\n";
+    file << "  ***\n";
+    file << " *****\n";
+    file << "*******\n";
+    file << "  |||\n";
+
+    file.close();
+}
+
+// << operator
+std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & form ) {
+    os << form.getName() << ", ShrubberyCreationForm grade " << form.getRequiredGradeToSign() << std::endl;
+
+    return os;
+}
