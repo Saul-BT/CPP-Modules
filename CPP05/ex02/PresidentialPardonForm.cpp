@@ -4,13 +4,13 @@
 // Constructors
 PresidentialPardonForm::PresidentialPardonForm(
         void
-    ) : AForm::AForm("PresidentialPardonForm", false, 145, 137), _target("Unknown") {
+    ) : AForm::AForm("PresidentialPardonForm", false, 25, 5), _target("Unknown") {
     std::cout << "PresidentialPardonForm: Default constructor called" << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(
         std::string const & target
-    ) : AForm::AForm("PresidentialPardonForm", false, 145, 137), _target(target) {
+    ) : AForm::AForm("PresidentialPardonForm", false, 25, 5), _target(target) {
     std::cout << "PresidentialPardonForm: Constructor with parameters called" << std::endl;
 }
 

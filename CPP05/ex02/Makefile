@@ -1,6 +1,6 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SOURCES = Form.cpp Bureaucrat.cpp main.cpp
+SOURCES = ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp AForm.cpp Bureaucrat.cpp main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 NAME = ex02
 

@@ -1,24 +1,72 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main( void ) {
-    Form tiovivo("tiovivo", false, 10, 10);
-    Bureaucrat jaimito("jaimito", 6);
-    Bureaucrat sigismundo("sigismundo", 94);
+    {
+        Bureaucrat god("pepe", 5);
+        
+        ShrubberyCreationForm shruForm("parque");
+        RobotomyRequestForm roboForm(god.getName());
+        PresidentialPardonForm presiForm(god.getName());
+        
+        std::cout << std::endl << "== Golden path example ==" << std::endl;
+    
+        god.signForm(shruForm);
+        god.executeForm(shruForm);
+    
+        std::cout << std::endl;
+    
+        god.signForm(roboForm);
+        god.executeForm(roboForm);
+    
+        std::cout << std::endl;
+    
+        god.signForm(presiForm);
+        god.executeForm(presiForm);
 
-    std::cout << "== Good example ==" << std::endl;
-
-    jaimito.signForm(tiovivo);
-    tiovivo.beSigned(jaimito);
-
-    std::cout << std::endl << "== Bad examples ==" << std::endl;
-
-    sigismundo.signForm(tiovivo);
-
-    try {
-        tiovivo.beSigned(sigismundo);
-    } catch (const Form::GradeTooLowException & e) {
-        std::cerr << "x Sigismundo broke his leg when trying to jump the tiovivo's fence" << std::endl;
-        std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        std::cout << std::endl;
     }
+
+    std::cout << "-----------------" << std::endl;
+
+    {
+        Bureaucrat juanillo("Juan", 5);
+        
+        ShrubberyCreationForm shruForm("zapato");
+        RobotomyRequestForm roboForm(juanillo.getName());
+        PresidentialPardonForm presiForm(juanillo.getName());
+        
+        std::cout << std::endl << "== Bad examples ==" << std::endl;
+    
+        try {
+            juanillo.executeForm(shruForm);
+        } catch (const AForm::SignedException & e) {
+            std::cerr << "x Onde va tu, anda pa tu casa" << std::endl;
+            std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        }
+
+        std::cout << std::endl;
+
+        try {
+            juanillo.downgrade();
+            juanillo.signForm(presiForm);
+            juanillo.executeForm(presiForm);
+        } catch (const AForm::GradeTooLowException & e) {
+            std::cerr << "x A donde vas tu payaso" << std::endl;
+            std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        }
+
+        std::cout << std::endl;
+
+        for (int i = 0; i < 80; i++)
+            juanillo.downgrade();
+        juanillo.signForm(roboForm);
+
+        std::cout << std::endl;
+    }
+
+    return 0;
 }

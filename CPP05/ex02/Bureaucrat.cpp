@@ -1,4 +1,4 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 // Constructors
@@ -62,7 +62,7 @@ void Bureaucrat::downgrade( void ) {
     this->_grade++;
 }
 
-void Bureaucrat::signForm( Form & form ) {
+void Bureaucrat::signForm( AForm & form ) {
     try {
         form.beSigned(*this);
         std::cout << this->_name << " signed " << form.getName() << std::endl;
@@ -74,6 +74,11 @@ void Bureaucrat::signForm( Form & form ) {
                   << e.what()
                   << std::endl;
     }
+}
+
+void Bureaucrat::executeForm( const AForm & form ) {
+    form.execute(*this);
+    std::cout << this->_name << " executed " << form.getName() << std::endl;
 }
 
 // Exceptions

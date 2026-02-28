@@ -53,6 +53,13 @@ public:
 
             const char * what( void ) const throw();
     };
+
+    class SignedException : public std::exception {
+
+        public:
+
+            const char * what( void ) const throw();
+    };
 };
 
 std::ostream & operator<<( std::ostream & os, AForm const & bureaucrat );

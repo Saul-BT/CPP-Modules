@@ -6,7 +6,7 @@
 #include <ctime>
 #include <string>
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 
@@ -30,7 +30,8 @@ public:
 
     void upgrade( void );
     void downgrade( void );
-    void signForm( Form & form );
+    void signForm( AForm & form );
+    void executeForm( const AForm & form );
 
     class GradeTooHighException : public std::exception {
 

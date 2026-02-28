@@ -4,13 +4,13 @@
 // Constructors
 RobotomyRequestForm::RobotomyRequestForm(
         void
-    ) : AForm::AForm("RobotomyRequestForm", false, 145, 137), _target("Unknown") {
+    ) : AForm::AForm("RobotomyRequestForm", false, 72, 45), _target("Unknown") {
     std::cout << "RobotomyRequestForm: Default constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(
         std::string const & target
-    ) : AForm::AForm("RobotomyRequestForm", false, 145, 137), _target(target) {
+    ) : AForm::AForm("RobotomyRequestForm", false, 72, 45), _target(target) {
     std::cout << "RobotomyRequestForm: Constructor with parameters called" << std::endl;
 }
 
@@ -42,7 +42,7 @@ void RobotomyRequestForm::makeDrillingNoises( void ) const {
     std::srand(std::time(0));
     std::string message = " has been robotomized successfully";
 
-    if (std::rand() > 0.5)
+    if (std::rand() > RAND_MAX / 2)
         message = " failed to be robotomized";
 
     std::cout << this->_target << message << std::endl;
