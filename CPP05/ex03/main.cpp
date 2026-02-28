@@ -11,7 +11,7 @@ int main( void ) {
     std::string name = supervisor.getName();
 
     {
-        AForm *form = anon.makeForm("ShrubberyCreationForm", "jardín");
+        AForm *form = anon.makeForm("shrubbery creation", "jardín");
     
         std::cout << std::endl << "== ShrubberyCreationForm ==" << std::endl;
         supervisor.signForm(*form);
@@ -19,7 +19,7 @@ int main( void ) {
     }
     std::cout << std::endl;
     {
-        AForm *form = anon.makeForm("RobotomyRequestForm", name);
+        AForm *form = anon.makeForm("robotomy request", name);
     
         std::cout << std::endl << "== RobotomyRequestForm ==" << std::endl;
         supervisor.signForm(*form);
@@ -27,7 +27,7 @@ int main( void ) {
     }
     std::cout << std::endl;
     {
-        AForm *form = anon.makeForm("PresidentialPardonForm", name);
+        AForm *form = anon.makeForm("presidential pardon", name);
     
         std::cout << std::endl << "== PresidentialPardonForm ==" << std::endl;
         supervisor.signForm(*form);

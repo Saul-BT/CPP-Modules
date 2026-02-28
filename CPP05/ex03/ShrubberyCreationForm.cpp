@@ -4,13 +4,13 @@
 // Constructors
 ShrubberyCreationForm::ShrubberyCreationForm(
         void
-    ) : AForm::AForm("ShrubberyCreationForm", false, 145, 137), _target("Unknown") {
+    ) : AForm::AForm("shrubbery creation", 145, 137), _target("Unknown") {
     std::cout << "ShrubberyCreationForm: Default constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(
         std::string const & target
-    ) : AForm::AForm("ShrubberyCreationForm", false, 145, 137), _target(target) {
+    ) : AForm::AForm("shrubbery creation", 145, 137), _target(target) {
     std::cout << "ShrubberyCreationForm: Constructor with parameters called" << std::endl;
 }
 
@@ -37,6 +37,11 @@ ShrubberyCreationForm & ShrubberyCreationForm::operator=( ShrubberyCreationForm 
     return *this;
 }
 
+// Getters
+const std::string & ShrubberyCreationForm::getTarget( void ) const {
+    return this->_target;
+}
+
 // Other methods
 void ShrubberyCreationForm::makeTreeASCII( void ) const {
     std::ofstream file((this->_target + "_shrubbery").c_str());
@@ -57,7 +62,12 @@ void ShrubberyCreationForm::makeTreeASCII( void ) const {
 
 // << operator
 std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & form ) {
-    os << form.getName() << ", ShrubberyCreationForm grade " << form.getRequiredGradeToSign() << std::endl;
+    os <<  "Form name: " << form.getName()
+       <<  " | Target: " << form.getTarget()
+       <<  " | Signed: " <<  (form.getIsSigned()  ?  "yes"  :  "no")
+       <<  " | Grade to sign: "  << form.getRequiredGradeToSign()
+       <<  " | Grade to exec: "  << form.getRequiredGradeToExec()
+       << std::endl;
 
     return os;
 }

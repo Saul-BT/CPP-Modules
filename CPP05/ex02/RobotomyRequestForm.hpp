@@ -22,6 +22,8 @@ public:
     RobotomyRequestForm( RobotomyRequestForm const & other );
     ~RobotomyRequestForm();
 
+    const std::string & getTarget( void ) const;
+
     void makeDrillingNoises( void ) const;
 
     RobotomyRequestForm & operator=( RobotomyRequestForm const & other );

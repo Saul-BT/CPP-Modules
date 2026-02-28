@@ -4,6 +4,16 @@
 #include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
+// Private static methods (common logic)
+int AForm::_checkGrade(int grade) {
+    if  (grade <  1) 
+        throw AForm::GradeTooHighException();
+    if  (grade >  150)
+        throw AForm::GradeTooLowException();
+
+    return grade;
+}
+
 // Constructors
 AForm::AForm( void ) : _name("Unknown"),
                      _isSigned(false),
@@ -14,20 +24,13 @@ AForm::AForm( void ) : _name("Unknown"),
 
 AForm::AForm(
         std::string const & name,
-        bool isSigned,
         int requiredGradeToSign,
         int requiredGradeToExec
     ) : _name(name),
-        _isSigned(isSigned),
-        _requiredGradeToSign(requiredGradeToSign),
-        _requiredGradeToExec(requiredGradeToExec) {
+        _isSigned(false),
+        _requiredGradeToSign(AForm::_checkGrade(requiredGradeToSign)),
+        _requiredGradeToExec(AForm::_checkGrade(requiredGradeToExec)) {
     std::cout << "AForm: Constructor with parameters called" << std::endl;
-    if (requiredGradeToSign > 150 || requiredGradeToExec > 150) {
-        throw AForm::GradeTooLowException();
-    }
-    else if (requiredGradeToSign < 1 || requiredGradeToExec < 1) {
-        throw AForm::GradeTooHighException();
-    }
 }
 
 AForm::AForm( AForm const & other ) {
@@ -130,7 +133,11 @@ const char * AForm::SignedException::what( void ) const throw() {
 
 // << operator
 std::ostream & operator<<( std::ostream & os, AForm const & form ) {
-    os << form.getName() << ", AForm grade " << form.getRequiredGradeToSign() << std::endl;
+    os <<  "Form name: " << form.getName()
+       <<  " | Signed: " <<  (form.getIsSigned()  ?  "yes"  :  "no")
+       <<  " | Grade to sign: "  << form.getRequiredGradeToSign()
+       <<  " | Grade to exec: "  << form.getRequiredGradeToExec()
+       << std::endl;
 
     return os;
 }

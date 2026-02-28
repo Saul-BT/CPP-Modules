@@ -15,6 +15,8 @@ private:
     std::string _name;
     int _grade;
 
+    static int _checkGrade(int grade);
+
 public:
 
     Bureaucrat( void );

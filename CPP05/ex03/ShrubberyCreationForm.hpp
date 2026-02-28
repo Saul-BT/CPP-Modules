@@ -22,6 +22,8 @@ public:
     ShrubberyCreationForm( ShrubberyCreationForm const & other );
     ~ShrubberyCreationForm();
 
+    const std::string & getTarget( void ) const;
+
     void makeTreeASCII( void ) const;
 
     ShrubberyCreationForm & operator=( ShrubberyCreationForm const & other );

@@ -22,6 +22,8 @@ public:
     PresidentialPardonForm( PresidentialPardonForm const & other );
     ~PresidentialPardonForm();
 
+    const std::string & getTarget( void ) const;
+
     void claimPardon( void ) const;
 
     PresidentialPardonForm & operator=( PresidentialPardonForm const & other );

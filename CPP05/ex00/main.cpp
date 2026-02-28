@@ -11,7 +11,7 @@ int main( void ) {
     try {
         juan.downgrade();
     } catch (const Bureaucrat::GradeTooLowException & e) {
-        std::cerr << "x Juan is a shit, exploited with GradeTooLowException" << std::endl;
+        std::cerr << "x Juan can do it better, exploited with GradeTooLowException" << std::endl;
         std::cerr << "x Actual exception message: " << e.what() << std::endl;
     }
     

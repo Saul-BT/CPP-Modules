@@ -49,10 +49,3 @@ AForm * Intern::makeForm( const std::string & formName, const std::string & targ
 
     return request;
 }
-
-// << operator
-std::ostream & operator<<( std::ostream & os, Intern const & form ) {
-    os << form.getName() << ", Intern grade " << form.getRequiredGradeToSign() << std::endl;
-
-    return os;
-}

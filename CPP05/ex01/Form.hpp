@@ -17,12 +17,13 @@ private:
     int _requiredGradeToSign;
     int _requiredGradeToExec;
 
+    static int _checkGrade(int grade);
+
 public:
 
     Form( void );
     Form(
         std::string const & name,
-        bool isSigned,
         int requiredGradeToSign,
         int requiredGradeToExec
     );

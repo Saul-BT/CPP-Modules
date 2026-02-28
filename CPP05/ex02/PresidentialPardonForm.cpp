@@ -4,13 +4,13 @@
 // Constructors
 PresidentialPardonForm::PresidentialPardonForm(
         void
-    ) : AForm::AForm("PresidentialPardonForm", false, 25, 5), _target("Unknown") {
+    ) : AForm::AForm("presidential pardon", 25, 5), _target("Unknown") {
     std::cout << "PresidentialPardonForm: Default constructor called" << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(
         std::string const & target
-    ) : AForm::AForm("PresidentialPardonForm", false, 25, 5), _target(target) {
+    ) : AForm::AForm("presidential pardon", 25, 5), _target(target) {
     std::cout << "PresidentialPardonForm: Constructor with parameters called" << std::endl;
 }
 
@@ -37,6 +37,11 @@ PresidentialPardonForm & PresidentialPardonForm::operator=( PresidentialPardonFo
     return *this;
 }
 
+// Getters
+const std::string & PresidentialPardonForm::getTarget( void ) const {
+    return this->_target;
+}
+
 // Other methods
 void PresidentialPardonForm::claimPardon( void ) const {
     std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
@@ -44,7 +49,12 @@ void PresidentialPardonForm::claimPardon( void ) const {
 
 // << operator
 std::ostream & operator<<( std::ostream & os, PresidentialPardonForm const & form ) {
-    os << form.getName() << ", PresidentialPardonForm grade " << form.getRequiredGradeToSign() << std::endl;
+    os <<  "Form name: " << form.getName()
+       <<  " | Target: " << form.getTarget()
+       <<  " | Signed: " <<  (form.getIsSigned()  ?  "yes"  :  "no")
+       <<  " | Grade to sign: "  << form.getRequiredGradeToSign()
+       <<  " | Grade to exec: "  << form.getRequiredGradeToExec()
+       << std::endl;
 
     return os;
 }

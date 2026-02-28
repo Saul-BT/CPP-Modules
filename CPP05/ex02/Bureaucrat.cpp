@@ -1,19 +1,25 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
+// Private static methods (common logic)
+int Bureaucrat::_checkGrade(int grade) {
+    if  (grade <  1) 
+        throw Bureaucrat::GradeTooHighException();
+    if  (grade >  150)
+        throw Bureaucrat::GradeTooLowException();
+
+    return grade;
+}
+
 // Constructors
 Bureaucrat::Bureaucrat( void ) : _name("Unknown"), _grade(150) {
     std::cout << "Bureaucrat: Default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat( std::string const & name, int grade ) : _name(name), _grade(grade) {
+Bureaucrat::Bureaucrat(
+        std::string const & name, int grade
+    ) : _name(name), _grade(Bureaucrat::_checkGrade(grade)) {
     std::cout << "Bureaucrat: Constructor with parameters called" << std::endl;
-    if (grade > 150) {
-        throw Bureaucrat::GradeTooLowException();
-    }
-    else if (grade < 1) {
-        throw Bureaucrat::GradeTooHighException();
-    }
 }
 
 Bureaucrat::Bureaucrat( Bureaucrat const & other ) {
@@ -49,17 +55,11 @@ int Bureaucrat::getGrade( void ) const {
 
 // Other methods
 void Bureaucrat::upgrade( void ) {
-    if (this->_grade <= 1) {
-        throw Bureaucrat::GradeTooHighException();
-    }
-    this->_grade--;
+    this->_grade = Bureaucrat::_checkGrade(this->_grade - 1);
 }
 
 void Bureaucrat::downgrade( void ) {
-    if (this->_grade >= 150) {
-        throw Bureaucrat::GradeTooLowException();
-    }
-    this->_grade++;
+    this->_grade = Bureaucrat::_checkGrade(this->_grade + 1);
 }
 
 void Bureaucrat::signForm( AForm & form ) {
@@ -67,11 +67,9 @@ void Bureaucrat::signForm( AForm & form ) {
         form.beSigned(*this);
         std::cout << this->_name << " signed " << form.getName() << std::endl;
     } catch (const std::exception & e) {
-        std::cout << this->_name
-                  << " couldn’t sign "
-                  << form.getName()
-                  << " because "
-                  << e.what()
+        std::cout << this->_name << " couldn’t sign "
+                  << form.getName() << " because "
+                  << e.what() <<  "."
                   << std::endl;
     }
 }
@@ -92,7 +90,8 @@ const char * Bureaucrat::GradeTooLowException::what( void ) const throw() {
 
 // << operator
 std::ostream & operator<<( std::ostream & os, Bureaucrat const & bureaucrat ) {
-    os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << std::endl;
+    os << bureaucrat.getName() << ", bureaucrat grade "
+       << bureaucrat.getGrade() << "." << std::endl;
 
     return os;
 }

@@ -1,6 +1,16 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
+// Private static methods (common logic)
+int Form::_checkGrade(int grade) {
+    if  (grade <  1) 
+        throw Form::GradeTooHighException();
+    if  (grade >  150)
+        throw Form::GradeTooLowException();
+
+    return grade;
+}
+
 // Constructors
 Form::Form( void ) : _name("Unknown"),
                      _isSigned(false),
@@ -11,20 +21,13 @@ Form::Form( void ) : _name("Unknown"),
 
 Form::Form(
         std::string const & name,
-        bool isSigned,
         int requiredGradeToSign,
         int requiredGradeToExec
     ) : _name(name),
-        _isSigned(isSigned),
-        _requiredGradeToSign(requiredGradeToSign),
-        _requiredGradeToExec(requiredGradeToExec) {
+        _isSigned(false),
+        _requiredGradeToSign(Form::_checkGrade(requiredGradeToSign)),
+        _requiredGradeToExec(Form::_checkGrade(requiredGradeToExec)) {
     std::cout << "Form: Constructor with parameters called" << std::endl;
-    if (requiredGradeToSign > 150 || requiredGradeToExec > 150) {
-        throw Form::GradeTooLowException();
-    }
-    else if (requiredGradeToSign < 1 || requiredGradeToExec < 1) {
-        throw Form::GradeTooHighException();
-    }
 }
 
 Form::Form( Form const & other ) {

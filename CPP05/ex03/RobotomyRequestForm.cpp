@@ -4,13 +4,13 @@
 // Constructors
 RobotomyRequestForm::RobotomyRequestForm(
         void
-    ) : AForm::AForm("RobotomyRequestForm", false, 72, 45), _target("Unknown") {
+    ) : AForm::AForm("robotomy request", 72, 45), _target("Unknown") {
     std::cout << "RobotomyRequestForm: Default constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(
         std::string const & target
-    ) : AForm::AForm("RobotomyRequestForm", false, 72, 45), _target(target) {
+    ) : AForm::AForm("robotomy request", 72, 45), _target(target) {
     std::cout << "RobotomyRequestForm: Constructor with parameters called" << std::endl;
 }
 
@@ -37,6 +37,11 @@ RobotomyRequestForm & RobotomyRequestForm::operator=( RobotomyRequestForm const 
     return *this;
 }
 
+// Getters
+const std::string & RobotomyRequestForm::getTarget( void ) const {
+    return this->_target;
+}
+
 // Other methods
 void RobotomyRequestForm::makeDrillingNoises( void ) const {
     std::srand(std::time(0));
@@ -45,12 +50,18 @@ void RobotomyRequestForm::makeDrillingNoises( void ) const {
     if (std::rand() > RAND_MAX / 2)
         message = " failed to be robotomized";
 
+    std::cout << "* drrr drrrrr drrr *" << std::endl;
     std::cout << this->_target << message << std::endl;
 }
 
 // << operator
 std::ostream & operator<<( std::ostream & os, RobotomyRequestForm const & form ) {
-    os << form.getName() << ", RobotomyRequestForm grade " << form.getRequiredGradeToSign() << std::endl;
+    os <<  "Form name: " << form.getName()
+       <<  " | Target: " << form.getTarget()
+       <<  " | Signed: " <<  (form.getIsSigned()  ?  "yes"  :  "no")
+       <<  " | Grade to sign: "  << form.getRequiredGradeToSign()
+       <<  " | Grade to exec: "  << form.getRequiredGradeToExec()
+       << std::endl;
 
     return os;
 }

@@ -2,7 +2,7 @@
 #include "Bureaucrat.hpp"
 
 int main( void ) {
-    Form tiovivo("tiovivo", false, 10, 10);
+    Form tiovivo("tiovivo", 10, 10);
     Bureaucrat jaimito("jaimito", 6);
     Bureaucrat sigismundo("sigismundo", 94);
 

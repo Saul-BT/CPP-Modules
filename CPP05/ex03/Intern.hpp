@@ -9,7 +9,7 @@
 
 #include "AForm.hpp"
 
-class Intern : public AForm {
+class Intern {
 
 public:
 
@@ -21,7 +21,5 @@ public:
 
     Intern & operator=( Intern const & other );
 };
-
-std::ostream & operator<<( std::ostream & os, Intern const & intern );
 
 #endif
