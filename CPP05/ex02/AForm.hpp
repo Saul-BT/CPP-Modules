@@ -62,6 +62,6 @@ public:
     };
 };
 
-std::ostream & operator<<( std::ostream & os, AForm const & bureaucrat );
+std::ostream & operator<<( std::ostream & os, AForm const & form );
 
 #endif

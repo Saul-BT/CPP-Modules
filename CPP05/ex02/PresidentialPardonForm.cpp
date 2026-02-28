@@ -43,8 +43,8 @@ void PresidentialPardonForm::claimPardon( void ) const {
 }
 
 // << operator
-std::ostream & operator<<( std::ostream & os, PresidentialPardonForm const & presidentialPardonForm ) {
-    os << presidentialPardonForm.getName() << ", PresidentialPardonForm grade " << presidentialPardonForm.getRequiredGradeToSign() << std::endl;
+std::ostream & operator<<( std::ostream & os, PresidentialPardonForm const & form ) {
+    os << form.getName() << ", PresidentialPardonForm grade " << form.getRequiredGradeToSign() << std::endl;
 
     return os;
 }

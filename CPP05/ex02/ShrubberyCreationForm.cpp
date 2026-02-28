@@ -56,8 +56,8 @@ void ShrubberyCreationForm::makeTreeASCII( void ) const {
 }
 
 // << operator
-std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & shrubberyCreationForm ) {
-    os << shrubberyCreationForm.getName() << ", ShrubberyCreationForm grade " << shrubberyCreationForm.getRequiredGradeToSign() << std::endl;
+std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & form ) {
+    os << form.getName() << ", ShrubberyCreationForm grade " << form.getRequiredGradeToSign() << std::endl;
 
     return os;
 }

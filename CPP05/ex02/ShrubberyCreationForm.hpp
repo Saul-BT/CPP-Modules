@@ -27,6 +27,6 @@ public:
     ShrubberyCreationForm & operator=( ShrubberyCreationForm const & other );
 };
 
-std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & bureaucrat );
+std::ostream & operator<<( std::ostream & os, ShrubberyCreationForm const & form );
 
 #endif

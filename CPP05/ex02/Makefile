@@ -16,6 +16,7 @@ $(NAME): $(OBJECTS)
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f *_shrubbery
 
 clean:
 	rm -f $(OBJECTS)

@@ -27,6 +27,6 @@ public:
     RobotomyRequestForm & operator=( RobotomyRequestForm const & other );
 };
 
-std::ostream & operator<<( std::ostream & os, RobotomyRequestForm const & bureaucrat );
+std::ostream & operator<<( std::ostream & os, RobotomyRequestForm const & form );
 
 #endif

@@ -49,8 +49,8 @@ void RobotomyRequestForm::makeDrillingNoises( void ) const {
 }
 
 // << operator
-std::ostream & operator<<( std::ostream & os, RobotomyRequestForm const & robotomyRequestForm ) {
-    os << robotomyRequestForm.getName() << ", RobotomyRequestForm grade " << robotomyRequestForm.getRequiredGradeToSign() << std::endl;
+std::ostream & operator<<( std::ostream & os, RobotomyRequestForm const & form ) {
+    os << form.getName() << ", RobotomyRequestForm grade " << form.getRequiredGradeToSign() << std::endl;
 
     return os;
 }
