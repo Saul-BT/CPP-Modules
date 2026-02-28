@@ -33,9 +33,11 @@ AForm::AForm(
     std::cout << "AForm: Constructor with parameters called" << std::endl;
 }
 
-AForm::AForm( AForm const & other ) {
+AForm::AForm( AForm const & other ) : _name(other._name),
+                                      _isSigned(other._isSigned),
+                                      _requiredGradeToSign(other._requiredGradeToSign),
+                                      _requiredGradeToExec(other._requiredGradeToExec) {
     std::cout << "AForm: Copy constructor called" << std::endl;
-    *this = other;
 }
 
 // Destructor
@@ -48,10 +50,7 @@ AForm & AForm::operator=( AForm const & other ) {
     std::cout << "AForm: Assignment operator called" << std::endl;
 
     if (this != &other) {
-        this->_name = other._name;
         this->_isSigned = other._isSigned;
-        this->_requiredGradeToSign = other._requiredGradeToSign;
-        this->_requiredGradeToExec = other._requiredGradeToExec;
     }
 
     return *this;
@@ -107,15 +106,7 @@ void AForm::execute( const Bureaucrat & executor ) const {
     if (this->_requiredGradeToExec < executor.getGrade())
         throw AForm::GradeTooLowException();
 
-    if (const ShrubberyCreationForm* form = dynamic_cast<const ShrubberyCreationForm*>(this)) {
-        form->makeTreeASCII();
-    }
-    else if (const RobotomyRequestForm* form = dynamic_cast<const RobotomyRequestForm*>(this)) {
-        form->makeDrillingNoises();
-    }
-    else if (const PresidentialPardonForm* form = dynamic_cast<const PresidentialPardonForm*>(this)) {
-        form->claimPardon();
-    }
+    this->beExecuted();
 }
 
 // Exceptions

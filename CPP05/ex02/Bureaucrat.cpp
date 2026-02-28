@@ -37,7 +37,6 @@ Bureaucrat & Bureaucrat::operator=( Bureaucrat const & other ) {
     std::cout << "Bureaucrat: Assignment operator called" << std::endl;
 
     if (this != &other) {
-        this->_name = other._name;
         this->_grade = other._grade;
     }
 
@@ -75,8 +74,15 @@ void Bureaucrat::signForm( AForm & form ) {
 }
 
 void Bureaucrat::executeForm( const AForm & form ) {
-    form.execute(*this);
-    std::cout << this->_name << " executed " << form.getName() << std::endl;
+    try {
+        form.execute(*this);
+        std::cout << this->_name << " executed " << form.getName() << std::endl;
+    } catch (const std::exception & e) {
+        std::cout << this->_name << " couldn’t execute "
+                  << form.getName() << " because "
+                  << e.what() <<  "."
+                  << std::endl;
+    }
 }
 
 // Exceptions

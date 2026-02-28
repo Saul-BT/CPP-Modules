@@ -43,11 +43,11 @@ const std::string & ShrubberyCreationForm::getTarget( void ) const {
 }
 
 // Other methods
-void ShrubberyCreationForm::makeTreeASCII( void ) const {
+void ShrubberyCreationForm::beExecuted( void ) const {
     std::ofstream file((this->_target + "_shrubbery").c_str());
 
     if (!file.is_open()) {
-        std::cerr << "Error: file cannot be opened" << std::endl;
+        std::cout << "Error: file cannot be opened" << std::endl;
         return;
     }
 

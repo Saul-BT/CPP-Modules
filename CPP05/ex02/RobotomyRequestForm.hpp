@@ -15,6 +15,10 @@ private:
 
     std::string _target;
 
+protected:
+
+    void beExecuted( void ) const;
+
 public:
 
     RobotomyRequestForm( void );
@@ -23,8 +27,6 @@ public:
     ~RobotomyRequestForm();
 
     const std::string & getTarget( void ) const;
-
-    void makeDrillingNoises( void ) const;
 
     RobotomyRequestForm & operator=( RobotomyRequestForm const & other );
 };

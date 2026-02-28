@@ -28,24 +28,36 @@ Intern & Intern::operator=( Intern const & other ) {
 }
 
 // Other methods
+AForm * Intern::createShrubbery( const std::string & target ) {
+    return new ShrubberyCreationForm(target);
+}
+
+AForm * Intern::createRobotomy( const std::string & target ) {
+    return new RobotomyRequestForm(target);
+}
+
+AForm * Intern::createPresidential( const std::string & target ) {
+    return new PresidentialPardonForm(target);
+}
+
 AForm * Intern::makeForm( const std::string & formName, const std::string & target ) const {
-    AForm *request = NULL;
-    AForm *forms[3];
-    forms[0] = new ShrubberyCreationForm(target);
-    forms[1] = new RobotomyRequestForm(target);
-    forms[2] = new PresidentialPardonForm(target);
+    struct FormEntry {
+        const std::string & name;
+        AForm * (*factory)(std::string const &);
+    };
 
-    for (int i = 0; i < 3; i++) {
-        if (forms[i]->getName() == formName)
-            request = forms[i];
-        else
-            delete forms[i];
+    static FormEntry const entries[] = {
+        { "shrubbery creation", &createShrubbery },
+        { "robotomy request", &createRobotomy },
+        { "presidential pardon", &createPresidential }
+    };
+
+    for (int i = 0; i < 3; ++i) {
+        if (formName == entries[i].name) {
+            std::cout << "Intern creates " << formName << std::endl;
+            return entries[i].factory(target);
+        }
     }
-
-    if (request == NULL)
-        std::cerr << "Sorry, the requested form wasn't found" << std::endl;
-    else
-        std::cout << "Intern creates " << formName << std::endl;
-
-    return request;
+    std::cout << "Intern: unknown form \"" << formName << "\"" << std::endl;
+    return NULL;
 }

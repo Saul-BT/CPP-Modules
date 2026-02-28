@@ -15,6 +15,10 @@ private:
 
     std::string _target;
 
+protected:
+
+    void beExecuted( void ) const;
+
 public:
 
     PresidentialPardonForm( void );
@@ -23,8 +27,6 @@ public:
     ~PresidentialPardonForm();
 
     const std::string & getTarget( void ) const;
-
-    void claimPardon( void ) const;
 
     PresidentialPardonForm & operator=( PresidentialPardonForm const & other );
 };

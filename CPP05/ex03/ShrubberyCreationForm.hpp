@@ -15,6 +15,13 @@ private:
 
     std::string _target;
 
+    static const int REQUIRED_GRADE_TO_SIGN;
+    static const int REQUIRED_GRADE_TO_EXEC;
+
+protected:
+
+    void beExecuted( void ) const;
+
 public:
 
     ShrubberyCreationForm( void );
@@ -23,8 +30,6 @@ public:
     ~ShrubberyCreationForm();
 
     const std::string & getTarget( void ) const;
-
-    void makeTreeASCII( void ) const;
 
     ShrubberyCreationForm & operator=( ShrubberyCreationForm const & other );
 };

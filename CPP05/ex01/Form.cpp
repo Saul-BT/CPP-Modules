@@ -30,9 +30,11 @@ Form::Form(
     std::cout << "Form: Constructor with parameters called" << std::endl;
 }
 
-Form::Form( Form const & other ) {
+Form::Form( Form const & other ) : _name(other._name),
+                                   _isSigned(other._isSigned),
+                                   _requiredGradeToSign(other._requiredGradeToSign),
+                                   _requiredGradeToExec(other._requiredGradeToExec) {
     std::cout << "Form: Copy constructor called" << std::endl;
-    *this = other;
 }
 
 // Destructor
@@ -45,10 +47,7 @@ Form & Form::operator=( Form const & other ) {
     std::cout << "Form: Assignment operator called" << std::endl;
 
     if (this != &other) {
-        this->_name = other._name;
         this->_isSigned = other._isSigned;
-        this->_requiredGradeToSign = other._requiredGradeToSign;
-        this->_requiredGradeToExec = other._requiredGradeToExec;
     }
 
     return *this;

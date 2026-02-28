@@ -44,8 +44,8 @@ int main( void ) {
         try {
             juanillo.executeForm(shruForm);
         } catch (const AForm::SignedException & e) {
-            std::cerr << "x Onde va tu, anda pa tu casa" << std::endl;
-            std::cerr << "x Actual exception message: " << e.what() << std::endl;
+            std::cout << "x Onde va tu, anda pa tu casa" << std::endl;
+            std::cout << "x Actual exception message: " << e.what() << std::endl;
         }
 
         std::cout << std::endl;
@@ -55,8 +55,8 @@ int main( void ) {
             juanillo.signForm(presiForm);
             juanillo.executeForm(presiForm);
         } catch (const AForm::GradeTooLowException & e) {
-            std::cerr << "x A donde vas tu payaso" << std::endl;
-            std::cerr << "x Actual exception message: " << e.what() << std::endl;
+            std::cout << "x A donde vas tu payaso" << std::endl;
+            std::cout << "x Actual exception message: " << e.what() << std::endl;
         }
 
         std::cout << std::endl;

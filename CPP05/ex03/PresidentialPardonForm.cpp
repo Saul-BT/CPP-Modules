@@ -1,16 +1,28 @@
 #include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
+// Constants
+const int PresidentialPardonForm::REQUIRED_GRADE_TO_SIGN = 25;
+const int PresidentialPardonForm::REQUIRED_GRADE_TO_EXEC = 5;
+
 // Constructors
 PresidentialPardonForm::PresidentialPardonForm(
         void
-    ) : AForm::AForm("presidential pardon", 25, 5), _target("Unknown") {
+    ) : AForm::AForm(
+        "presidential pardon",
+        PresidentialPardonForm::REQUIRED_GRADE_TO_SIGN,
+        PresidentialPardonForm::REQUIRED_GRADE_TO_EXEC
+    ), _target("Unknown") {
     std::cout << "PresidentialPardonForm: Default constructor called" << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(
         std::string const & target
-    ) : AForm::AForm("presidential pardon", 25, 5), _target(target) {
+    ) : AForm::AForm(
+        "presidential pardon",
+        PresidentialPardonForm::REQUIRED_GRADE_TO_SIGN,
+        PresidentialPardonForm::REQUIRED_GRADE_TO_EXEC
+    ), _target(target) {
     std::cout << "PresidentialPardonForm: Constructor with parameters called" << std::endl;
 }
 
@@ -43,7 +55,7 @@ const std::string & PresidentialPardonForm::getTarget( void ) const {
 }
 
 // Other methods
-void PresidentialPardonForm::claimPardon( void ) const {
+void PresidentialPardonForm::beExecuted( void ) const {
     std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 

@@ -43,7 +43,7 @@ const std::string & RobotomyRequestForm::getTarget( void ) const {
 }
 
 // Other methods
-void RobotomyRequestForm::makeDrillingNoises( void ) const {
+void RobotomyRequestForm::beExecuted( void ) const {
     std::srand(std::time(0));
     std::string message = " has been robotomized successfully";
 

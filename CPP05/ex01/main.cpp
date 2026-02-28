@@ -18,7 +18,7 @@ int main( void ) {
     try {
         tiovivo.beSigned(sigismundo);
     } catch (const Form::GradeTooLowException & e) {
-        std::cerr << "x Sigismundo broke his leg when trying to jump the tiovivo's fence" << std::endl;
-        std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        std::cout << "x Sigismundo broke his leg when trying to jump the tiovivo's fence" << std::endl;
+        std::cout << "x Actual exception message: " << e.what() << std::endl;
     }
 }

@@ -43,7 +43,7 @@ const std::string & PresidentialPardonForm::getTarget( void ) const {
 }
 
 // Other methods
-void PresidentialPardonForm::claimPardon( void ) const {
+void PresidentialPardonForm::beExecuted( void ) const {
     std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 

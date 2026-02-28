@@ -12,12 +12,16 @@ class AForm {
 
 private:
 
-    std::string _name;
+    const  std::string _name;
     bool _isSigned;
-    int _requiredGradeToSign;
-    int _requiredGradeToExec;
+    const int _requiredGradeToSign;
+    const int _requiredGradeToExec;
 
     static int _checkGrade(int grade);
+
+protected:
+
+    virtual void beExecuted( void ) const = 0;
 
 public:
 

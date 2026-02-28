@@ -36,7 +36,6 @@ Bureaucrat & Bureaucrat::operator=( Bureaucrat const & other ) {
     std::cout << "Bureaucrat: Assignment operator called" << std::endl;
 
     if (this != &other) {
-        this->_name = other._name;
         this->_grade = other._grade;
     }
 

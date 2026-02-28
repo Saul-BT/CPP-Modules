@@ -1,16 +1,28 @@
 #include "RobotomyRequestForm.hpp"
 #include "Bureaucrat.hpp"
 
+// Constants
+const int RobotomyRequestForm::REQUIRED_GRADE_TO_SIGN = 72;
+const int RobotomyRequestForm::REQUIRED_GRADE_TO_EXEC = 45;
+
 // Constructors
 RobotomyRequestForm::RobotomyRequestForm(
         void
-    ) : AForm::AForm("robotomy request", 72, 45), _target("Unknown") {
+    ) : AForm::AForm(
+        "robotomy request",
+        RobotomyRequestForm::REQUIRED_GRADE_TO_SIGN,
+        RobotomyRequestForm::REQUIRED_GRADE_TO_EXEC
+    ), _target("Unknown") {
     std::cout << "RobotomyRequestForm: Default constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(
         std::string const & target
-    ) : AForm::AForm("robotomy request", 72, 45), _target(target) {
+    ) : AForm::AForm(
+        "robotomy request",
+        RobotomyRequestForm::REQUIRED_GRADE_TO_SIGN,
+        RobotomyRequestForm::REQUIRED_GRADE_TO_EXEC
+    ), _target(target) {
     std::cout << "RobotomyRequestForm: Constructor with parameters called" << std::endl;
 }
 
@@ -43,7 +55,7 @@ const std::string & RobotomyRequestForm::getTarget( void ) const {
 }
 
 // Other methods
-void RobotomyRequestForm::makeDrillingNoises( void ) const {
+void RobotomyRequestForm::beExecuted( void ) const {
     std::srand(std::time(0));
     std::string message = " has been robotomized successfully";
 

@@ -11,29 +11,29 @@ int main( void ) {
     try {
         juan.downgrade();
     } catch (const Bureaucrat::GradeTooLowException & e) {
-        std::cerr << "x Juan can do it better, exploited with GradeTooLowException" << std::endl;
-        std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        std::cout << "x Juan can do it better, exploited with GradeTooLowException" << std::endl;
+        std::cout << "x Actual exception message: " << e.what() << std::endl;
     }
     
     try {
         pepe.upgrade();
     } catch (const Bureaucrat::GradeTooHighException & e) {
-        std::cerr << "x Pepe's head is flying, to much power" << std::endl;
-        std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        std::cout << "x Pepe's head is flying, to much power" << std::endl;
+        std::cout << "x Actual exception message: " << e.what() << std::endl;
     }
 
     try {
         Bureaucrat maria("maria", 0);
     } catch (const Bureaucrat::GradeTooHighException & e) {
-        std::cerr << "x Maria never exists" << std::endl;
-        std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        std::cout << "x Maria never exists" << std::endl;
+        std::cout << "x Actual exception message: " << e.what() << std::endl;
     }
 
     try {
         Bureaucrat lucas("lucas", 151);
     } catch (const Bureaucrat::GradeTooLowException & e) {
-        std::cerr << "x Lucas? Where are u?" << std::endl;
-        std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        std::cout << "x Lucas? Where are u?" << std::endl;
+        std::cout << "x Actual exception message: " << e.what() << std::endl;
     }
 
     try {
@@ -49,8 +49,8 @@ int main( void ) {
 
         std::cout << loquillo << std::endl;
     } catch (const std::exception & e) {
-        std::cerr << "x loquillo illo k ase?" << std::endl;
-        std::cerr << "x Actual exception message: " << e.what() << std::endl;
+        std::cout << "x loquillo illo k ase?" << std::endl;
+        std::cout << "x Actual exception message: " << e.what() << std::endl;
     }
 
     std::cout << std::endl << "== Good examples ==" << std::endl;

@@ -1,16 +1,28 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Bureaucrat.hpp"
 
+// Constants
+const int ShrubberyCreationForm::REQUIRED_GRADE_TO_SIGN = 145;
+const int ShrubberyCreationForm::REQUIRED_GRADE_TO_EXEC = 137;
+
 // Constructors
 ShrubberyCreationForm::ShrubberyCreationForm(
         void
-    ) : AForm::AForm("shrubbery creation", 145, 137), _target("Unknown") {
+    ) : AForm::AForm(
+        "shrubbery creation",
+        ShrubberyCreationForm::REQUIRED_GRADE_TO_SIGN,
+        ShrubberyCreationForm::REQUIRED_GRADE_TO_EXEC
+    ), _target("Unknown") {
     std::cout << "ShrubberyCreationForm: Default constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(
         std::string const & target
-    ) : AForm::AForm("shrubbery creation", 145, 137), _target(target) {
+    ) : AForm::AForm(
+        "shrubbery creation",
+        ShrubberyCreationForm::REQUIRED_GRADE_TO_SIGN,
+        ShrubberyCreationForm::REQUIRED_GRADE_TO_EXEC
+    ), _target(target) {
     std::cout << "ShrubberyCreationForm: Constructor with parameters called" << std::endl;
 }
 
@@ -43,11 +55,11 @@ const std::string & ShrubberyCreationForm::getTarget( void ) const {
 }
 
 // Other methods
-void ShrubberyCreationForm::makeTreeASCII( void ) const {
+void ShrubberyCreationForm::beExecuted( void ) const {
     std::ofstream file((this->_target + "_shrubbery").c_str());
 
     if (!file.is_open()) {
-        std::cerr << "Error: file cannot be opened" << std::endl;
+        std::cout << "Error: file cannot be opened" << std::endl;
         return;
     }
 

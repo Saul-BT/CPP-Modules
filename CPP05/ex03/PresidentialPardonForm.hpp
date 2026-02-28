@@ -15,6 +15,13 @@ private:
 
     std::string _target;
 
+    static const int REQUIRED_GRADE_TO_SIGN;
+    static const int REQUIRED_GRADE_TO_EXEC;
+
+protected:
+
+    void beExecuted( void ) const;
+
 public:
 
     PresidentialPardonForm( void );
@@ -24,7 +31,6 @@ public:
 
     const std::string & getTarget( void ) const;
 
-    void claimPardon( void ) const;
 
     PresidentialPardonForm & operator=( PresidentialPardonForm const & other );
 };
