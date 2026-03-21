@@ -1,7 +1,14 @@
 #include "ScalarConverter.hpp"
+#include <iostream>
 
-int main( void ) {
-    ScalarConverter::convert("4.f");
+int main( int argc, char *argv[] ) {
+    if (argc != 2) {
+        std::cout << "Error: this program expect one parameter" << std::endl;
+        std::cout << "  usage: ./convert <value>" << std::endl;
+        return 1;
+    }
+
+    ScalarConverter::convert(argv[1]);
     
     return 0;
 }
