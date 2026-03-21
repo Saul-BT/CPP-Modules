@@ -1,14 +1,10 @@
+#include <cmath>
+#include <limits>
+#include <cerrno>
 #include <cctype>
 #include <iostream>
 #include <cstdlib>
 #include "ScalarConverter.hpp"
-
-// Static attributes
-unsigned char ScalarConverter::_cvalue = 0;
-int ScalarConverter::_ivalue = 0;
-float ScalarConverter::_fvalue = 0;
-double ScalarConverter::_dvalue = 0;
-bool ScalarConverter::_hasDecimals = false;
 
 // Constructors
 ScalarConverter::ScalarConverter( void ) {
@@ -79,8 +75,6 @@ bool ScalarConverter::_isDouble( std::string const & value ) {
         return false;
     if (floatPart.length() > 0 && !ScalarConverter::_isInt(floatPart))
         return false;
-    if (std::strtod(floatPart.c_str(), NULL) != 0)
-        ScalarConverter::_hasDecimals = true;
     return true;
 }
 
@@ -95,44 +89,8 @@ bool ScalarConverter::_isPseudo( std::string const & value ) {
         || value == "-inff");
 }
 
-void ScalarConverter::_parseValues( std::string const & value ) {
-    ScalarConverter::_hasDecimals = false;
-    if (ScalarConverter::_isChar(value)) {
-        std::cout << "-> debug: is char" << std::endl;
-        ScalarConverter::_cvalue = value[0];
-        ScalarConverter::_ivalue = static_cast<int>(ScalarConverter::_cvalue);
-        ScalarConverter::_fvalue = static_cast<float>(ScalarConverter::_cvalue);
-        ScalarConverter::_dvalue = static_cast<double>(ScalarConverter::_cvalue);
-    }
-    else if (ScalarConverter::_isInt(value)) {
-        std::cout << "-> debug: is int" << std::endl;
-        long lvalue = std::strtol(value.c_str(), NULL, 10);
-        ScalarConverter::_ivalue = static_cast<int>(lvalue);
-        ScalarConverter::_cvalue = static_cast<char>(ScalarConverter::_ivalue);
-        ScalarConverter::_fvalue = static_cast<float>(ScalarConverter::_ivalue);
-        ScalarConverter::_dvalue = static_cast<double>(ScalarConverter::_ivalue);
-    }
-    else if (ScalarConverter::_isFloat(value)) {
-        std::cout << "-> debug: is float" << std::endl;
-        ScalarConverter::_fvalue = std::strtod(value.c_str(), NULL);
-        ScalarConverter::_cvalue = static_cast<char>(ScalarConverter::_fvalue);
-        ScalarConverter::_ivalue = static_cast<int>(ScalarConverter::_fvalue);
-        ScalarConverter::_dvalue = static_cast<double>(ScalarConverter::_fvalue);
-    }
-    else if (ScalarConverter::_isDouble(value)) {
-        std::cout << "-> debug: is double" << std::endl;
-        ScalarConverter::_dvalue = std::strtod(value.c_str(), NULL);
-        ScalarConverter::_cvalue = static_cast<char>(ScalarConverter::_dvalue);
-        ScalarConverter::_ivalue = static_cast<int>(ScalarConverter::_dvalue);
-        ScalarConverter::_fvalue = static_cast<float>(ScalarConverter::_dvalue);
-    }
-    else {
-        throw ScalarConverter::InvalidParseException();
-    }
-}
-
 void ScalarConverter::_printPseudo( std::string const & value ) {
-    if (!ScalarConverter::_isPseudo(value)) throw ScalarConverter::InvalidParseException();
+    if (!ScalarConverter::_isPseudo(value)) throw ScalarConverter::InvalidFormatException();
 
     size_t valueLen = value.length();
     const char* trimmed = value.c_str();
@@ -147,47 +105,73 @@ void ScalarConverter::_printPseudo( std::string const & value ) {
     std::cout << "double: " << dValue << std::endl;
 }
 
-void ScalarConverter::_printChar() {
-    std::cout << "char: ";
-    if (ScalarConverter::_ivalue < 0 || ScalarConverter::_ivalue > 127) {
-        std::cout << "impossible";
+void ScalarConverter::_printChar( double const & raw ) {
+    if (raw < 0 || raw > 127) {
+        std::cout << "char: impossible" << std::endl;
+        return;
     }
-    else if (std::isprint(ScalarConverter::_cvalue)) {
-        std::cout << "'" << _cvalue << "'";
+
+    char value = static_cast<char>(raw);
+    std::cout << "char: ";
+    if (std::isprint(value)) {
+        std::cout << "'" << value << "'";
     }
     else {
         std::cout << "Non displayable";
     }
+
     std::cout << std::endl;
 }
 
-void ScalarConverter::_printInt() {
-    std::cout << "int: " << _ivalue << std::endl;
+void ScalarConverter::_printInt( double const & raw ) {
+    if (raw < -std::numeric_limits<int>::max() || raw > std::numeric_limits<int>::max()) {
+        std::cout << "int: impossible" << std::endl;
+        return;
+    }
+
+    std::cout << "int: " << static_cast<int>(raw) << std::endl;
 }
 
-void ScalarConverter::_printFloat() {
-    std::cout << "float: " << _fvalue;
-    if (!ScalarConverter::_hasDecimals) std::cout << ".0";
+void ScalarConverter::_printFloat( double const & raw ) {
+    if (raw < -std::numeric_limits<float>::max() || raw > std::numeric_limits<float>::max()) {
+        std::cout << "float: impossible" << std::endl;
+        return;
+    }
+
+    std::cout << "float: " << static_cast<float>(raw);
+    if (std::floor(raw) == raw)
+        std::cout << ".0";
     std::cout << "f" << std::endl;
 }
 
-void ScalarConverter::_printDouble() {
-    std::cout << "double: " << _dvalue;
-    if (!ScalarConverter::_hasDecimals) std::cout << ".0";
+void ScalarConverter::_printDouble( double const & raw ) {
+    std::cout << "double: " << raw;
+    if (std::floor(raw) == raw)
+        std::cout << ".0";
     std::cout << std::endl;
 }
 
 
 // Other methods
 void ScalarConverter::convert( std::string const & value ) {
+    errno = 0;
+    double raw;
+    bool allImpossible = false;
     if (ScalarConverter::_isPseudo(value)) {
         ScalarConverter::_printPseudo(value);
         return;
     }
 
-    try {
-        ScalarConverter::_parseValues(value);
-    } catch (ScalarConverter::InvalidParseException const & _e) {
+    if (ScalarConverter::_isChar(value))
+        raw = static_cast<double>(value[0]);
+    else if (ScalarConverter::_isInt(value)
+          || ScalarConverter::_isFloat(value)
+          || ScalarConverter::_isDouble(value))
+        raw = std::strtod(value.c_str(), NULL);
+    else
+        allImpossible = true;
+
+    if (allImpossible || errno == ERANGE) {
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
         std::cout << "float: impossible" << std::endl;
@@ -195,13 +179,13 @@ void ScalarConverter::convert( std::string const & value ) {
         return;
     }
 
-    ScalarConverter::_printChar();
-    ScalarConverter::_printInt();
-    ScalarConverter::_printFloat();
-    ScalarConverter::_printDouble();
+    ScalarConverter::_printChar(raw);
+    ScalarConverter::_printInt(raw);
+    ScalarConverter::_printFloat(raw);
+    ScalarConverter::_printDouble(raw);
 }
 
 // Exceptions
-const char * ScalarConverter::InvalidParseException::what( void ) const throw() {
+const char * ScalarConverter::InvalidFormatException::what( void ) const throw() {
     return "ERROR: cannot parse value";
 }
