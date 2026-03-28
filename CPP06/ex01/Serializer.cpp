@@ -1,4 +1,3 @@
-#include <stdexcept>
 #include <iostream>
 
 #include "Serializer.hpp"
@@ -24,21 +23,9 @@ Serializer & Serializer::operator=( Serializer const & other ) {
 
 // Static methods
 uintptr_t Serializer::serialize( Data * ptr ) {
-    if (ptr == NULL)
-        throw std::invalid_argument("Error: null pointer cannot be serialized");
-
     return reinterpret_cast<uintptr_t>(ptr);
 }
 
 Data * Serializer::deserialize( uintptr_t raw ) {
-    if (raw == 0)
-        throw std::invalid_argument("Error: null reference cannot be deserialized");
-
-    try {
-        return reinterpret_cast<Data *>(raw);
-    }
-    catch ( std::exception const & e ) {
-        std::cout << "aa" << e.what() << std::endl;
-    }
-    return NULL;
+    return reinterpret_cast<Data *>(raw);
 }

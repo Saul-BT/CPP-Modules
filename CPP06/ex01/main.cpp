@@ -18,19 +18,5 @@ int main( void ) {
     std::cout << "Pointers match   : "
               << (deserialized == &data ? "true" : "false") << std::endl;
 
-    std::cout << std::endl << "== Edge cases ==" << std::endl;
-
-    try {
-        Serializer::serialize(NULL);
-    } catch ( std::exception & e ) {
-        std::cout << "serialize(NULL) caught: " << e.what() << std::endl;
-    }
-
-    try {
-        Serializer::deserialize(0);
-    } catch ( std::exception & e ) {
-        std::cout << "deserialize(0) caught: " << e.what() << std::endl;
-    }
-    
     return 0;
 }
