@@ -11,8 +11,7 @@ Serializer::Serializer( Serializer const & other ) {
 }
 
 // Destructor
-Serializer::~Serializer() {
-}
+Serializer::~Serializer() { }
 
 // Assignment operator
 Serializer & Serializer::operator=( Serializer const & other ) {

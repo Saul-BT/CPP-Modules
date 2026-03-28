@@ -12,7 +12,6 @@ private:
     static bool _isFloat( std::string const & value );
     static bool _isDouble( std::string const & value );
     static bool _isPseudo( std::string const & value );
-    static void _parseValues( std::string const & value );
     static void _printChar( double const & raw );
     static void _printInt( double const & raw );
     static void _printFloat( double const & raw );
@@ -21,7 +20,7 @@ private:
 
     ScalarConverter( void );
     ScalarConverter( ScalarConverter const & other );
-    virtual ~ScalarConverter() = 0;
+    ~ScalarConverter();
     
     ScalarConverter & operator=( ScalarConverter const & other );
 

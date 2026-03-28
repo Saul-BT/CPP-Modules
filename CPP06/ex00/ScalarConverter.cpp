@@ -7,23 +7,17 @@
 #include "ScalarConverter.hpp"
 
 // Constructors
-ScalarConverter::ScalarConverter( void ) {
-    std::cout << "ScalarConverter: Default constructor called" << std::endl;
-}
+ScalarConverter::ScalarConverter( void ) { }
 
 ScalarConverter::ScalarConverter( ScalarConverter const & other ) {
-    std::cout << "ScalarConverter: Copy constructor called" << std::endl;
     (void) other;
 }
 
 // Destructor
-ScalarConverter::~ScalarConverter() {
-    std::cout << "ScalarConverter: Destructor called" << std::endl;
-}
+ScalarConverter::~ScalarConverter() { }
 
 // Assignment operator
 ScalarConverter & ScalarConverter::operator=( ScalarConverter const & other ) {
-    std::cout << "ScalarConverter: Assignment operator called" << std::endl;
     (void) other;
 
     return *this;
@@ -93,12 +87,11 @@ void ScalarConverter::_printPseudo( std::string const & value ) {
     if (!ScalarConverter::_isPseudo(value)) throw ScalarConverter::InvalidFormatException();
 
     size_t valueLen = value.length();
-    const char* trimmed = value.c_str();
+    std::string trimmed = value;
     if ((value == "nanf" || (value[valueLen - 2] == 'f' && value[valueLen - 1] == 'f'))) {
-        // TODO: Check this line
-        trimmed = value.substr(0, valueLen - 1).c_str();
+        trimmed = value.substr(0, valueLen - 1);
     }
-    double dValue = std::strtod(trimmed, NULL);
+    double dValue = std::strtod(trimmed.c_str(), NULL);
     std::cout << "char: impossible" << std::endl;
     std::cout << "int: impossible" << std::endl;
     std::cout << "float: " << dValue << "f" << std::endl;
@@ -124,7 +117,7 @@ void ScalarConverter::_printChar( double const & raw ) {
 }
 
 void ScalarConverter::_printInt( double const & raw ) {
-    if (raw < -std::numeric_limits<int>::max() || raw > std::numeric_limits<int>::max()) {
+    if (raw < std::numeric_limits<int>::min() || raw > std::numeric_limits<int>::max()) {
         std::cout << "int: impossible" << std::endl;
         return;
     }
