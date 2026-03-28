@@ -11,24 +11,16 @@
 Base * generate( void ) {
     int random = std::rand() % 3;
 
-    if (random == 0) {
-        std::cout << "Generating A instance" << std::endl;
+    if (random == 0)
         return new A();
-    }
-    else if (random == 1) {
-        std::cout << "Generating B instance" << std::endl;
+    else if (random == 1)
         return new B();
-    }
-    else {
-        std::cout << "Generating C instance" << std::endl;
+    else
         return new C();
-    }
 
 }
 
 void identify( Base * ptr ) {
-    std::cout << "Identifying pointer type: ";
-
     if (dynamic_cast<A *>(ptr))
         std::cout << "A" << std::endl;
     else if (dynamic_cast<B *>(ptr))
@@ -40,25 +32,23 @@ void identify( Base * ptr ) {
 }
 
 void identify( Base & ref ) {
-    std::cout << "Identifying ref type: ";
-
     try {
         (void) dynamic_cast<A &>(ref);
         std::cout << "A" << std::endl;
         return;
-    } catch (const std::bad_cast &) {}
+    } catch (const std::exception &) {}
 
     try {
         (void) dynamic_cast<B &>(ref);
         std::cout << "B" << std::endl;
         return;
-    } catch (const std::bad_cast &) {}
+    } catch (const std::exception &) {}
 
     try {
         (void) dynamic_cast<C &>(ref);
         std::cout << "C" << std::endl;
         return;
-    } catch (const std::bad_cast &) {}
+    } catch (const std::exception &) {}
 
     std::cout << "Unknown" << std::endl;
 }
