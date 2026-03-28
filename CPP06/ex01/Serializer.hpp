@@ -1,7 +1,8 @@
 #ifndef SERIALIZER_CLASS_H
 #define SERIALIZER_CLASS_H
 
-#include <cstdint>
+#include <stdint.h>
+
 #include "Data.hpp"
 
 
@@ -11,7 +12,7 @@ private:
 
     Serializer( void );
     Serializer( Serializer const & other );
-    virtual ~Serializer() = 0;
+    ~Serializer();
     
     Serializer & operator=( Serializer const & other );
 
