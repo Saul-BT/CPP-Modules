@@ -48,7 +48,7 @@ bool ScalarConverter::_isInt( std::string const & value ) {
 
 bool ScalarConverter::_isFloat( std::string const & value ) {
     size_t last = value.length() - 1;
-    if (value[last] != 'f')
+    if (value.empty() || value[last] != 'f')
         return false;
     if (!ScalarConverter::_isDouble(value.substr(0, last)))
         return false;
@@ -58,7 +58,7 @@ bool ScalarConverter::_isFloat( std::string const & value ) {
 bool ScalarConverter::_isDouble( std::string const & value ) {
     size_t dot = value.find('.');
     size_t last = value.length() - 1;
-    if (dot == std::string::npos)
+    if (value.empty() || dot == std::string::npos)
         return false;
 
     std::string intPart = value.substr(0, dot);
@@ -131,8 +131,9 @@ void ScalarConverter::_printFloat( double const & raw ) {
         return;
     }
 
-    std::cout << "float: " << static_cast<float>(raw);
-    if (std::floor(raw) == raw)
+    float fValue = static_cast<float>(raw);
+    std::cout << "float: " << fValue;
+    if (std::floor(fValue) == fValue)
         std::cout << ".0";
     std::cout << "f" << std::endl;
 }
