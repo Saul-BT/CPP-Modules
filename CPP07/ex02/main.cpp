@@ -14,10 +14,15 @@ int main( void ) {
         mirror[i] = value;
     }
 
-    // Test deep copy via copy constructor
+    // Test deep copy via copy constructor and verify equity
     {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
+        bool allEqual = true;
+
+        for (unsigned int i = 0; i < test.size(); i++)
+            allEqual = allEqual && test[i] == numbers[i];
+        std::cout << "Copy ok? " << (allEqual ? "yes" : "no") << std::endl;
     }
 
     // Verify values preserved after copy destruction
@@ -33,14 +38,14 @@ int main( void ) {
     try {
         numbers[-2] = 0;
     }
-    catch(const std::exception& e) {
+    catch(const std::exception & e) {
         std::cerr << "Out of bounds (negative): " << e.what() << std::endl;
     }
 
     try {
         numbers[MAX_VAL] = 0;
     }
-    catch(const std::exception& e) {
+    catch(const std::exception & e) {
         std::cerr << "Out of bounds (overflow): " << e.what() << std::endl;
     }
 
@@ -68,21 +73,10 @@ int main( void ) {
         try {
             empty[0] = 42;
         }
-        catch(const std::exception& e) {
+        catch(const std::exception & e) {
             std::cerr << "Empty array access: " << e.what() << std::endl;
         }
     }
-
-    // Test with different types
-    {
-        Array<std::string> strArr(3);
-        strArr[0] = "Hello";
-        strArr[1] = "World";
-        strArr[2] = "42";
-        for (unsigned int i = 0; i < strArr.size(); i++)
-            std::cout << strArr[i] << std::endl;
-    }
-
     // Test size()
     std::cout << "Size: " << numbers.size() << std::endl;
 

@@ -22,35 +22,35 @@ public:
         *this = src;
     }
 
-    ~Array(void) {
-        delete[] _elements;
+    ~Array( void ) {
+        delete[] this->_elements;
     }
 
     Array & operator=( Array const & rhs ) {
         if (this != &rhs) {
-            delete[] _elements;
-            _size = rhs._size;
-            _elements = new T[_size]();
-            for (unsigned int i = 0; i < _size; i++)
-                _elements[i] = rhs._elements[i];
+            delete[] this->_elements;
+            this->_size = rhs._size;
+            this->_elements = new T[this->_size]();
+            for (unsigned int i = 0; i < this->_size; i++)
+                this->_elements[i] = rhs._elements[i];
         }
         return *this;
     }
 
     T & operator[]( unsigned int index ) {
-        if (index >= _size)
-            throw std::exception();
-        return _elements[index];
+        if (index >= this->_size)
+            throw std::out_of_range("Array index out of bounds");
+        return this->_elements[index];
     }
 
     T const & operator[]( unsigned int index ) const {
-        if (index >= _size)
-            throw std::exception();
-        return _elements[index];
+        if (index >= this->_size)
+            throw std::out_of_range("Array index out of bounds");
+        return this->_elements[index];
     }
 
     unsigned int size( void ) const {
-        return _size;
+        return this->_size;
     }
 };
 
