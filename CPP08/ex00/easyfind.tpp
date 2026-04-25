@@ -10,3 +10,5 @@ typename T::iterator easyfind( T & container, int target ) {
 
     return iterator;
 }
+
+//TODO: check if I need another for const container
