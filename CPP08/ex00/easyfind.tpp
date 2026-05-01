@@ -11,4 +11,12 @@ typename T::iterator easyfind( T & container, int target ) {
     return iterator;
 }
 
-//TODO: check if I need another for const container
+template <typename T>
+typename T::const_iterator easyfind( const T & container, int target ) {
+    typename T::const_iterator iterator = std::find(container.begin(), container.end(), target);
+
+    if (iterator == container.end())
+        throw std::runtime_error("Value not found");
+
+    return iterator;
+}

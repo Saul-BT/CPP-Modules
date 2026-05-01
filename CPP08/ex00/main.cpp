@@ -20,7 +20,7 @@ int main( void ) {
         // Not nice
         it = easyfind(vec, 99);
         std::cout << "Found in vector: " << *it << std::endl;
-    } catch (std::exception& e) {
+    } catch (std::exception & e) {
         std::cout << "Exception: " << e.what() << std::endl;
     }
 
@@ -38,7 +38,7 @@ int main( void ) {
         // Not nice
         it = easyfind(lst, 99);
         std::cout << "Found in list: " << *it << std::endl;
-    } catch (std::exception& e) {
+    } catch (std::exception & e) {
         std::cout << "Exception: " << e.what() << std::endl;
     }
 
@@ -55,8 +55,22 @@ int main( void ) {
         // Not nice
         it = easyfind(deq, 99);
         std::cout << "Found in deque: " << *it << std::endl;
-    } catch (std::exception& e) {
+    } catch (std::exception & e) {
         std::cout << "Exception: " << e.what() << std::endl;
+    }
+
+    // Test const vector
+    const std::vector<int> cvec = vec;
+    try {
+        // Nice
+        std::vector<int>::const_iterator cit = easyfind(cvec, 42);
+        std::cout << "Found in const vector: " << *cit << std::endl;
+
+        // Not nice
+        cit = easyfind(cvec, 99);
+        std::cout << "Found in const vector: " << *cit << std::endl;
+    } catch (std::exception & e) {
+        std::cout << "Exception (const): " << e.what() << std::endl;
     }
 
     return 0;
