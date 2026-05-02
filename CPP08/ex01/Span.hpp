@@ -1,5 +1,5 @@
-#ifndef SPAN_CLASS_H
-#define SPAN_CLASS_H
+#ifndef SPAN_CLASS_HPP
+#define SPAN_CLASS_HPP
 
 #include <stdexcept>
 #include <iterator>
