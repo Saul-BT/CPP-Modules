@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <iterator>
 #include <vector>
+#include <cstddef>
 
 class Span {
 
@@ -14,6 +15,7 @@ private:
 
 public:
 
+    Span( void );
     Span( unsigned int N );
     Span( Span const & other );
     ~Span();
@@ -26,8 +28,10 @@ public:
 
     template <typename I>
     void addRange(I begin, I end) {
-        unsigned int newSize = std::distance(begin, end) + this->_members.size();
-        if (newSize > this->_maxSize)
+        typename std::iterator_traits<I>::difference_type dist = std::distance(begin, end);
+        if (dist < 0)
+            throw std::runtime_error("Invalid range");
+        if (this->_members.size() + static_cast<std::size_t>(dist) > this->_maxSize)
             throw std::runtime_error("Not enough capacity for this range");
 
         this->_members.insert(this->_members.end(), begin, end);
