@@ -1,6 +1,6 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SOURCES = main.cpp
+SOURCES = Span.cpp main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 NAME = ex01
 

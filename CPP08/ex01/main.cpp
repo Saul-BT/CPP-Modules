@@ -1,62 +1,70 @@
 #include <iostream>
 #include <vector>
-#include <deque>
 #include <list>
-#include "easyfind.hpp"
+#include <exception>
+#include "Span.hpp"
 
-int main( void ) {
-    // Test vector
-    std::vector<int> vec;
-    vec.push_back(1);
-    vec.push_back(5);
-    vec.push_back(42);
-    vec.push_back(7);
-
+int main() {
+    std::cout << "=== Span basic usage ===" << std::endl;
     try {
-        // Nice
-        std::vector<int>::iterator it = easyfind(vec, 42);
-        std::cout << "Found in vector: " << *it << std::endl;
+        Span sp(5);
+        sp.addNumber(6);
+        sp.addNumber(3);
+        sp.addNumber(17);
+        sp.addNumber(9);
+        sp.addNumber(11);
 
-        // Not nice
-        it = easyfind(vec, 99);
-        std::cout << "Found in vector: " << *it << std::endl;
-    } catch (std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+        std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
+        std::cout << "Longest span:  " << sp.longestSpan() << std::endl;
+
+        std::cout << "Trying to add one more number (should throw)\n";
+        sp.addNumber(42);
+    } catch (const std::exception& e) {
+        std::cout << "Caught expected exception: " << e.what() << std::endl;
     }
 
-    // Test list
-    std::list<int> lst;
-    lst.push_back(10);
-    lst.push_back(20);
-    lst.push_back(30);
-
+    std::cout << "\n=== addRange tests ===" << std::endl;
     try {
-        // Nice
-        std::list<int>::iterator it = easyfind(lst, 20);
-        std::cout << "Found in list: " << *it << std::endl;
+        Span big(10);
+        std::vector<int> v;
+        for (int i = 0; i < 8; ++i)
+            v.push_back(i * 10);
 
-        // Not nice
-        it = easyfind(lst, 99);
-        std::cout << "Found in list: " << *it << std::endl;
-    } catch (std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+        big.addRange(v.begin(), v.end());
+        std::cout << "After adding range of 8 elements, size ok.\n";
+        std::cout << "Shortest: " << big.shortestSpan() << "  Longest: " << big.longestSpan() << std::endl;
+
+        std::list<int> lst;
+        lst.push_back(1);
+        lst.push_back(2);
+        lst.push_back(3);
+        std::cout << "Attempting to add a small list of 3 elements (should exceed capacity and throw)\n";
+        big.addRange(lst.begin(), lst.end());
+
+    } catch (const std::exception& e) {
+        std::cout << "Caught expected exception from addRange: " << e.what() << std::endl;
     }
 
-    // Test deque
-    std::deque<int> deq;
-    deq.push_back(100);
-    deq.push_back(200);
-
+    std::cout << "\n=== duplicate values ===" << std::endl;
     try {
-        // Nice
-        std::deque<int>::iterator it = easyfind(deq, 100);
-        std::cout << "Found in deque: " << *it << std::endl;
+        Span dup(3);
+        dup.addNumber(5);
+        dup.addNumber(5);
+        dup.addNumber(5);
+        std::cout << "Shortest (expect 0): " << dup.shortestSpan() << std::endl;
+        std::cout << "Longest  (expect 0): " << dup.longestSpan() << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "Unexpected exception: " << e.what() << std::endl;
+    }
 
-        // Not nice
-        it = easyfind(deq, 99);
-        std::cout << "Found in deque: " << *it << std::endl;
-    } catch (std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
+    std::cout << "\n=== error cases ===" << std::endl;
+    try {
+        Span small(1);
+        small.addNumber(42);
+        std::cout << "Calling shortestSpan on a container with 1 element (should throw)\n";
+        small.shortestSpan();
+    } catch (const std::exception& e) {
+        std::cout << "Caught expected exception: " << e.what() << std::endl;
     }
 
     return 0;

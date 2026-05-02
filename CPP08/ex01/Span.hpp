@@ -2,6 +2,7 @@
 #define SPAN_CLASS_H
 
 #include <stdexcept>
+#include <iterator>
 #include <vector>
 
 class Span {
@@ -11,13 +12,13 @@ private:
     unsigned int _maxSize;
     std::vector<int> _members;
 
+public:
+
     Span( unsigned int N );
     Span( Span const & other );
     ~Span();
 
     Span & operator=( Span const & other );
-
-public:
 
     void addNumber( int num );
     int shortestSpan( void ) const;
